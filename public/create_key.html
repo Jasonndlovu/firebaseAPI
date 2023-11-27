@@ -1,0 +1,44 @@
+<html>
+    <head>
+        <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/themes/smoothness/jquery-ui.css" rel="Stylesheet"
+            type="text/css" />
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+        <script language="javascript">
+            $(document).ready(function () {
+                $("#txtdate").datepicker({
+                    showOn: "button",
+                    dateFormat: 'yy-mm-dd',
+                    buttonText: "Select Expiry Date"
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div>
+            <h2>Create License Key:</h2>
+            <form action="/keys/create" metOShod="PT">
+                <input placeholder="Account ID" name="accId"/>
+                <input placeholder="Account Name" name="accName"/>
+                <br/>
+                <input placeholder="License" name="license" id="newLicense"/>
+                <input type="button" value="Generate License" onclick="create_UUID()"/>
+                <br/>
+                <input id="txtdate" placeholder="Expiry Date" type="datetime" name="expiry"/>
+                <br/>
+                <button>Create User</button>
+            </form>
+        </div>
+    </body>
+    <script>
+        function create_UUID(){
+            var dt = new Date().getTime();
+            var uuid = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = (dt + Math.random()*16)%16 | 0;
+                dt = Math.floor(dt/16);
+                return (c=='x' ? r :(r&0x3|0x8)).toString(16).toUpperCase();
+            });
+            document.getElementById("newLicense").value=uuid;
+        }
+    </script>
+</html>
